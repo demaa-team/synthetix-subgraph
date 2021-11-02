@@ -41,6 +41,8 @@ export function isEscrow(holder: string, network: string): boolean {
       escrowContracts.get('escrow-optimism-kovan') == holder ||
       escrowContracts.get('rewardEscrow-optimism-kovan') == holder
     );
+  } else if (network == 'mumbai') {
+    return escrowContracts.get('escrow-mumbai') == holder || escrowContracts.get('rewardEscrow-mumbai') == holder;
   }
   return false;
 }

@@ -15,11 +15,13 @@ function getReleaseInfo(file, network = undefined) {
 
   let info = null;
   if (net === 'mainnet' || net === 'kovan') {
-    return require('synthetix/publish/deployed/' + net + '/' + file);
+    return require('synthetix-demaa/publish/deployed/' + net + '/' + file);
   } else if (net === 'optimism') {
-    return require('synthetix/publish/deployed/mainnet-ovm/' + file);
+    return require('syntsynthetix-demaahetix/publish/deployed/mainnet-ovm/' + file);
   } else if (net === 'optimism-kovan') {
-    return require('synthetix/publish/deployed/kovan-ovm/' + file);
+    return require('synthetix-demaa/publish/deployed/kovan-ovm/' + file);
+  } else if (net === 'mumbai') {
+    return require('synthetix-demaa/publish/deployed/mumbai/' + file);
   }
 
   return info;
@@ -132,7 +134,7 @@ function getContractDeployments(contractName, startBlock = 0, endBlock = Number.
   return addressInfo;
 }
 
-const NETWORKS = ['mainnet', 'kovan', 'optimism-kovan', 'optimism'];
+const NETWORKS = ['mainnet', 'kovan', 'optimism-kovan', 'optimism', 'mumbai'];
 
 module.exports = {
   getCurrentNetwork,

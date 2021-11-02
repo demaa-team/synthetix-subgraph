@@ -44,7 +44,7 @@ getContractDeployments('ProxyERC20').forEach((a, i) => {
 module.exports = {
   specVersion: '0.0.2',
   description: 'Synthetix Global Debt API',
-  repository: 'https://github.com/Synthetixio/synthetix-subgraph',
+  repository: 'https://github.com/demaa-team/synthetix-subgraph',
   schema: {
     file: './global-debt.graphql',
   },

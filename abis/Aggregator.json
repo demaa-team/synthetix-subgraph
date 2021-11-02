@@ -59,7 +59,10 @@
   },
   {
     "constant": false,
-    "inputs": [{ "name": "_recipient", "type": "address" }, { "name": "_amount", "type": "uint256" }],
+    "inputs": [
+      { "name": "_recipient", "type": "address" },
+      { "name": "_amount", "type": "uint256" }
+    ],
     "name": "transferLINK",
     "outputs": [],
     "payable": false,
@@ -77,7 +80,10 @@
   },
   {
     "constant": false,
-    "inputs": [{ "name": "_clRequestId", "type": "bytes32" }, { "name": "_response", "type": "int256" }],
+    "inputs": [
+      { "name": "_clRequestId", "type": "bytes32" },
+      { "name": "_response", "type": "int256" }
+    ],
     "name": "chainlinkCallback",
     "outputs": [],
     "payable": false,
@@ -172,7 +178,10 @@
   },
   {
     "constant": false,
-    "inputs": [{ "name": "_requester", "type": "address" }, { "name": "_allowed", "type": "bool" }],
+    "inputs": [
+      { "name": "_requester", "type": "address" },
+      { "name": "_allowed", "type": "bool" }
+    ],
     "name": "setAuthorization",
     "outputs": [],
     "payable": false,

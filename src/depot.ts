@@ -1,4 +1,4 @@
-import { ethereum } from '@graphprotocol/graph-ts';
+import { ethereum, dataSource } from '@graphprotocol/graph-ts';
 
 import {
   SynthWithdrawal as SynthWithdrawalEvent,
@@ -15,7 +15,7 @@ function createUserAction(event: ethereum.Event): UserAction {
   let entity = new UserAction(event.transaction.hash.toHex() + '-' + event.logIndex.toString());
   entity.block = event.block.number;
   entity.timestamp = event.block.timestamp;
-  entity.network = 'mainnet';
+  entity.network = dataSource.network();
   return entity;
 }
 
@@ -23,7 +23,7 @@ export function handleSynthWithdrawal(event: SynthWithdrawalEvent): void {
   let entity = createUserAction(event);
   entity.user = event.params.user;
   entity.amount = toDecimal(event.params.amount);
-  entity.type = 'withdrawl';
+  entity.type = dataSource.network();
   entity.save();
 }
 
@@ -32,7 +32,7 @@ export function handleSynthDeposit(event: SynthDepositEvent): void {
   entity.user = event.params.user;
   entity.amount = toDecimal(event.params.amount);
   entity.depositIndex = event.params.depositIndex;
-  entity.type = 'deposit';
+  entity.type = dataSource.network();
   entity.save();
 }
 
@@ -61,7 +61,7 @@ export function handleClearedDeposit(event: ClearedDepositEvent): void {
   entity.fromETHAmount = toDecimal(event.params.fromETHAmount);
   entity.toAmount = toDecimal(event.params.toAmount);
   entity.depositIndex = event.params.depositIndex;
-  entity.network = 'mainnet';
+  entity.network = dataSource.network();
   entity.block = event.block.number;
   entity.timestamp = event.block.timestamp;
   entity.save();
@@ -76,6 +76,6 @@ export function handleExchange(event: ExchangeEvent): void {
   entity.toAmount = toDecimal(event.params.toAmount);
   entity.block = event.block.number;
   entity.timestamp = event.block.timestamp;
-  entity.network = 'mainnet';
+  entity.network = dataSource.network();
   entity.save();
 }

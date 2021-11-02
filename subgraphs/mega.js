@@ -30,7 +30,7 @@ for (const included of includedSubgraphs) {
 module.exports = {
   specVersion: '0.0.2',
   description: 'Synthetix Mega Subgraph',
-  repository: 'https://github.com/Synthetixio/synthetix-subgraph',
+  repository: 'https://github.com/demaa-team/synthetix-subgraph',
   schema: {
     file: './mega.graphql',
   },

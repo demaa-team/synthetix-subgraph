@@ -21,7 +21,7 @@ templates.find((v) => v.name == 'SynthAggregator').mapping.file = '../src/rates.
 module.exports = {
   specVersion: '0.0.2',
   description: 'Synthetix Rates API',
-  repository: 'https://github.com/Synthetixio/synthetix-subgraph',
+  repository: 'https://github.com/demaa-team/synthetix-subgraph',
   schema: {
     file: './rates.graphql',
   },

@@ -41,7 +41,7 @@ getContractDeployments('DelegateApprovals').forEach((a, i) => {
 module.exports = {
   specVersion: '0.0.2',
   description: 'Synthetix Delegation API',
-  repository: 'https://github.com/Synthetixio/synthetix-subgraph',
+  repository: 'https://github.com/demaa-team/synthetix-subgraph',
   schema: {
     file: './delegation.graphql',
   },

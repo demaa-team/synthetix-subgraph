@@ -12,7 +12,7 @@
         "type": "address"
       },
       {
-        "internalType": "address",
+        "internalType": "contract ICollateralManager",
         "name": "_manager",
         "type": "address"
       },
@@ -39,8 +39,7 @@
     ],
     "payable": false,
     "stateMutability": "nonpayable",
-    "type": "constructor",
-    "signature": "constructor"
+    "type": "constructor"
   },
   {
     "anonymous": false,
@@ -59,8 +58,7 @@
       }
     ],
     "name": "CacheUpdated",
-    "type": "event",
-    "signature": "0x88a93678a3692f6789d9546fc621bf7234b101ddb7d4fe479455112831b8aa68"
+    "type": "event"
   },
   {
     "anonymous": false,
@@ -73,8 +71,7 @@
       }
     ],
     "name": "CanOpenLoansUpdated",
-    "type": "event",
-    "signature": "0x261991749e1b2436706a31bde8bf184bb37fe21e303709b78d3b881afacadaa2"
+    "type": "event"
   },
   {
     "anonymous": false,
@@ -105,8 +102,7 @@
       }
     ],
     "name": "CollateralDeposited",
-    "type": "event",
-    "signature": "0x0b1992dffc262be88559dcaf96464e9d661d8bfca7e82f2bb73e31932a82187c"
+    "type": "event"
   },
   {
     "anonymous": false,
@@ -137,8 +133,7 @@
       }
     ],
     "name": "CollateralWithdrawn",
-    "type": "event",
-    "signature": "0xfae26280bca25d80f1501a9e363c73d3845e651c9aaae54f1fc09a9dcd5f3303"
+    "type": "event"
   },
   {
     "anonymous": false,
@@ -151,8 +146,7 @@
       }
     ],
     "name": "InteractionDelayUpdated",
-    "type": "event",
-    "signature": "0x4d71c92b0a9dc236066597b95637bb04d58cd135e9165aee13eb68e3199c2361"
+    "type": "event"
   },
   {
     "anonymous": false,
@@ -165,8 +159,7 @@
       }
     ],
     "name": "IssueFeeRateUpdated",
-    "type": "event",
-    "signature": "0xe7bd72551c54d568cd97b00dc52d2787b5c5d4f0070d3582c1e8ba25141f799c"
+    "type": "event"
   },
   {
     "anonymous": false,
@@ -185,8 +178,7 @@
       }
     ],
     "name": "LoanClosed",
-    "type": "event",
-    "signature": "0xcab22a4e95d29d40da2ace3f6ec72b49954a9bc7b2584f8fd47bf7f357a3ed6f"
+    "type": "event"
   },
   {
     "anonymous": false,
@@ -223,8 +215,7 @@
       }
     ],
     "name": "LoanClosedByLiquidation",
-    "type": "event",
-    "signature": "0x697721ed1b9d4866cb1aaa0692f62bb3abc1b01c2dafeaad053ffd4532aa7dbb"
+    "type": "event"
   },
   {
     "anonymous": false,
@@ -267,8 +258,7 @@
       }
     ],
     "name": "LoanCreated",
-    "type": "event",
-    "signature": "0x604952b18be5fed608cbdd28101dc57bd667055c9678ec6d44fb1d8e4c7c172a"
+    "type": "event"
   },
   {
     "anonymous": false,
@@ -293,8 +283,7 @@
       }
     ],
     "name": "LoanDrawnDown",
-    "type": "event",
-    "signature": "0x5754fe57f36ac0f121901d7555aba517e6608590429d86a81c662cf358310654"
+    "type": "event"
   },
   {
     "anonymous": false,
@@ -331,8 +320,7 @@
       }
     ],
     "name": "LoanPartiallyLiquidated",
-    "type": "event",
-    "signature": "0xb6e43890aeea54fbe6c0ed628e78172a0ff30bbcb1d70d8b130b12c366bac4c5"
+    "type": "event"
   },
   {
     "anonymous": false,
@@ -369,22 +357,20 @@
       }
     ],
     "name": "LoanRepaymentMade",
-    "type": "event",
-    "signature": "0xdf10512219e869922340b1b24b21d7d79bf71f411a6391cc7c3ef5dd2fe89e7f"
+    "type": "event"
   },
   {
     "anonymous": false,
     "inputs": [
       {
         "indexed": false,
-        "internalType": "address",
+        "internalType": "contract ICollateralManager",
         "name": "manager",
         "type": "address"
       }
     ],
     "name": "ManagerUpdated",
-    "type": "event",
-    "signature": "0x2c1c11af44aa5608f1dca38c00275c30ea091e02417d36e70e9a1538689c433d"
+    "type": "event"
   },
   {
     "anonymous": false,
@@ -397,8 +383,7 @@
       }
     ],
     "name": "MaxLoansPerAccountUpdated",
-    "type": "event",
-    "signature": "0x6a5107c7de25c5b210323f3c6c2caea6502583fbe45acdca57e75a4dc9534e8c"
+    "type": "event"
   },
   {
     "anonymous": false,
@@ -411,8 +396,7 @@
       }
     ],
     "name": "MinCollateralUpdated",
-    "type": "event",
-    "signature": "0xd19fe8ad9152af12b174a60210fb798db0767d63973ebb97298dc44d67a5c82d"
+    "type": "event"
   },
   {
     "anonymous": false,
@@ -425,8 +409,7 @@
       }
     ],
     "name": "MinCratioRatioUpdated",
-    "type": "event",
-    "signature": "0x813a44586e8ecb9390b2568dbe810e193087f80e415c8845340ef06d4cbb42a5"
+    "type": "event"
   },
   {
     "anonymous": false,
@@ -445,8 +428,7 @@
       }
     ],
     "name": "OwnerChanged",
-    "type": "event",
-    "signature": "0xb532073b38c83145e3e5135377a08bf9aab55bc0fd7c1179cd4fb995d2a5159c"
+    "type": "event"
   },
   {
     "anonymous": false,
@@ -459,8 +441,7 @@
       }
     ],
     "name": "OwnerNominated",
-    "type": "event",
-    "signature": "0x906a1c6bd7e3091ea86693dd029a831c19049ce77f1dce2ce0bab1cacbabce22"
+    "type": "event"
   },
   {
     "constant": false,
@@ -469,8 +450,7 @@
     "outputs": [],
     "payable": false,
     "stateMutability": "nonpayable",
-    "type": "function",
-    "signature": "0x79ba5097"
+    "type": "function"
   },
   {
     "constant": false,
@@ -490,8 +470,7 @@
     "outputs": [],
     "payable": false,
     "stateMutability": "nonpayable",
-    "type": "function",
-    "signature": "0x5eb2ad01"
+    "type": "function"
   },
   {
     "constant": false,
@@ -511,8 +490,7 @@
     "outputs": [],
     "payable": false,
     "stateMutability": "nonpayable",
-    "type": "function",
-    "signature": "0x23d60e2e"
+    "type": "function"
   },
   {
     "constant": true,
@@ -538,8 +516,7 @@
     ],
     "payable": false,
     "stateMutability": "view",
-    "type": "function",
-    "signature": "0x72e18b6a"
+    "type": "function"
   },
   {
     "constant": true,
@@ -554,8 +531,7 @@
     ],
     "payable": false,
     "stateMutability": "view",
-    "type": "function",
-    "signature": "0x4065b81b"
+    "type": "function"
   },
   {
     "constant": false,
@@ -570,8 +546,7 @@
     "outputs": [],
     "payable": false,
     "stateMutability": "nonpayable",
-    "type": "function",
-    "signature": "0x379607f5"
+    "type": "function"
   },
   {
     "constant": false,
@@ -586,8 +561,7 @@
     "outputs": [],
     "payable": false,
     "stateMutability": "nonpayable",
-    "type": "function",
-    "signature": "0x0aebeb4e"
+    "type": "function"
   },
   {
     "constant": true,
@@ -602,8 +576,7 @@
     ],
     "payable": false,
     "stateMutability": "view",
-    "type": "function",
-    "signature": "0xb562a1ab"
+    "type": "function"
   },
   {
     "constant": true,
@@ -671,35 +644,7 @@
     ],
     "payable": false,
     "stateMutability": "view",
-    "type": "function",
-    "signature": "0xdac8cf68"
-  },
-  {
-    "constant": true,
-    "inputs": [
-      {
-        "internalType": "bytes32",
-        "name": "currency",
-        "type": "bytes32"
-      },
-      {
-        "internalType": "uint256",
-        "name": "amount",
-        "type": "uint256"
-      }
-    ],
-    "name": "collateralRedeemed",
-    "outputs": [
-      {
-        "internalType": "uint256",
-        "name": "collateral",
-        "type": "uint256"
-      }
-    ],
-    "payable": false,
-    "stateMutability": "view",
-    "type": "function",
-    "signature": "0x0a153c97"
+    "type": "function"
   },
   {
     "constant": false,
@@ -719,8 +664,7 @@
     "outputs": [],
     "payable": true,
     "stateMutability": "payable",
-    "type": "function",
-    "signature": "0x47e7ef24"
+    "type": "function"
   },
   {
     "constant": false,
@@ -740,8 +684,7 @@
     "outputs": [],
     "payable": false,
     "stateMutability": "nonpayable",
-    "type": "function",
-    "signature": "0xd2b8035a"
+    "type": "function"
   },
   {
     "constant": true,
@@ -756,8 +699,7 @@
     ],
     "payable": false,
     "stateMutability": "view",
-    "type": "function",
-    "signature": "0x15aaf4dd"
+    "type": "function"
   },
   {
     "constant": true,
@@ -772,8 +714,7 @@
     ],
     "payable": false,
     "stateMutability": "view",
-    "type": "function",
-    "signature": "0x2af64bd3"
+    "type": "function"
   },
   {
     "constant": true,
@@ -788,8 +729,7 @@
     ],
     "payable": false,
     "stateMutability": "view",
-    "type": "function",
-    "signature": "0x361e2086"
+    "type": "function"
   },
   {
     "constant": false,
@@ -814,77 +754,7 @@
     "outputs": [],
     "payable": false,
     "stateMutability": "nonpayable",
-    "type": "function",
-    "signature": "0x0710285c"
-  },
-  {
-    "constant": true,
-    "inputs": [
-      {
-        "components": [
-          {
-            "internalType": "uint256",
-            "name": "id",
-            "type": "uint256"
-          },
-          {
-            "internalType": "address payable",
-            "name": "account",
-            "type": "address"
-          },
-          {
-            "internalType": "uint256",
-            "name": "collateral",
-            "type": "uint256"
-          },
-          {
-            "internalType": "bytes32",
-            "name": "currency",
-            "type": "bytes32"
-          },
-          {
-            "internalType": "uint256",
-            "name": "amount",
-            "type": "uint256"
-          },
-          {
-            "internalType": "bool",
-            "name": "short",
-            "type": "bool"
-          },
-          {
-            "internalType": "uint256",
-            "name": "accruedInterest",
-            "type": "uint256"
-          },
-          {
-            "internalType": "uint256",
-            "name": "interestIndex",
-            "type": "uint256"
-          },
-          {
-            "internalType": "uint256",
-            "name": "lastInteraction",
-            "type": "uint256"
-          }
-        ],
-        "internalType": "struct ICollateralLoan.Loan",
-        "name": "loan",
-        "type": "tuple"
-      }
-    ],
-    "name": "liquidationAmount",
-    "outputs": [
-      {
-        "internalType": "uint256",
-        "name": "amount",
-        "type": "uint256"
-      }
-    ],
-    "payable": false,
-    "stateMutability": "view",
-    "type": "function",
-    "signature": "0xe74337c6"
+    "type": "function"
   },
   {
     "constant": true,
@@ -892,15 +762,14 @@
     "name": "manager",
     "outputs": [
       {
-        "internalType": "address",
+        "internalType": "contract ICollateralManager",
         "name": "",
         "type": "address"
       }
     ],
     "payable": false,
     "stateMutability": "view",
-    "type": "function",
-    "signature": "0x481c6a75"
+    "type": "function"
   },
   {
     "constant": true,
@@ -926,8 +795,7 @@
     ],
     "payable": false,
     "stateMutability": "view",
-    "type": "function",
-    "signature": "0x7e132355"
+    "type": "function"
   },
   {
     "constant": true,
@@ -942,8 +810,7 @@
     ],
     "payable": false,
     "stateMutability": "view",
-    "type": "function",
-    "signature": "0xeb8e3b65"
+    "type": "function"
   },
   {
     "constant": true,
@@ -958,8 +825,7 @@
     ],
     "payable": false,
     "stateMutability": "view",
-    "type": "function",
-    "signature": "0xba2de9bc"
+    "type": "function"
   },
   {
     "constant": true,
@@ -974,8 +840,7 @@
     ],
     "payable": false,
     "stateMutability": "view",
-    "type": "function",
-    "signature": "0x925ead11"
+    "type": "function"
   },
   {
     "constant": false,
@@ -990,8 +855,7 @@
     "outputs": [],
     "payable": false,
     "stateMutability": "nonpayable",
-    "type": "function",
-    "signature": "0x1627540c"
+    "type": "function"
   },
   {
     "constant": true,
@@ -1006,8 +870,7 @@
     ],
     "payable": false,
     "stateMutability": "view",
-    "type": "function",
-    "signature": "0x53a47bb7"
+    "type": "function"
   },
   {
     "constant": false,
@@ -1027,8 +890,7 @@
     "outputs": [],
     "payable": true,
     "stateMutability": "payable",
-    "type": "function",
-    "signature": "0x06c19e3f"
+    "type": "function"
   },
   {
     "constant": true,
@@ -1043,8 +905,7 @@
     ],
     "payable": false,
     "stateMutability": "view",
-    "type": "function",
-    "signature": "0x8da5cb5b"
+    "type": "function"
   },
   {
     "constant": true,
@@ -1065,8 +926,7 @@
     ],
     "payable": false,
     "stateMutability": "view",
-    "type": "function",
-    "signature": "0xf3f43703"
+    "type": "function"
   },
   {
     "constant": false,
@@ -1075,8 +935,7 @@
     "outputs": [],
     "payable": false,
     "stateMutability": "nonpayable",
-    "type": "function",
-    "signature": "0x74185360"
+    "type": "function"
   },
   {
     "constant": false,
@@ -1101,8 +960,7 @@
     "outputs": [],
     "payable": false,
     "stateMutability": "nonpayable",
-    "type": "function",
-    "signature": "0x8cd2e0c7"
+    "type": "function"
   },
   {
     "constant": true,
@@ -1117,8 +975,7 @@
     ],
     "payable": false,
     "stateMutability": "view",
-    "type": "function",
-    "signature": "0x04f3bcec"
+    "type": "function"
   },
   {
     "constant": true,
@@ -1133,8 +990,7 @@
     ],
     "payable": false,
     "stateMutability": "view",
-    "type": "function",
-    "signature": "0x899ffef4"
+    "type": "function"
   },
   {
     "constant": false,
@@ -1149,8 +1005,7 @@
     "outputs": [],
     "payable": false,
     "stateMutability": "nonpayable",
-    "type": "function",
-    "signature": "0x90abb4d9"
+    "type": "function"
   },
   {
     "constant": false,
@@ -1165,8 +1020,7 @@
     "outputs": [],
     "payable": false,
     "stateMutability": "nonpayable",
-    "type": "function",
-    "signature": "0x4c17ace4"
+    "type": "function"
   },
   {
     "constant": false,
@@ -1181,14 +1035,13 @@
     "outputs": [],
     "payable": false,
     "stateMutability": "nonpayable",
-    "type": "function",
-    "signature": "0xa76cdfa5"
+    "type": "function"
   },
   {
     "constant": false,
     "inputs": [
       {
-        "internalType": "address",
+        "internalType": "contract ICollateralManager",
         "name": "_newManager",
         "type": "address"
       }
@@ -1197,8 +1050,7 @@
     "outputs": [],
     "payable": false,
     "stateMutability": "nonpayable",
-    "type": "function",
-    "signature": "0xd0ebdbe7"
+    "type": "function"
   },
   {
     "constant": false,
@@ -1213,8 +1065,7 @@
     "outputs": [],
     "payable": false,
     "stateMutability": "nonpayable",
-    "type": "function",
-    "signature": "0x0cdd1c65"
+    "type": "function"
   },
   {
     "constant": true,
@@ -1235,8 +1086,7 @@
     ],
     "payable": false,
     "stateMutability": "view",
-    "type": "function",
-    "signature": "0xde81eda9"
+    "type": "function"
   },
   {
     "constant": true,
@@ -1251,8 +1101,7 @@
     ],
     "payable": false,
     "stateMutability": "view",
-    "type": "function",
-    "signature": "0xc19d93fb"
+    "type": "function"
   },
   {
     "constant": true,
@@ -1273,8 +1122,7 @@
     ],
     "payable": false,
     "stateMutability": "view",
-    "type": "function",
-    "signature": "0x30edd961"
+    "type": "function"
   },
   {
     "constant": true,
@@ -1295,8 +1143,7 @@
     ],
     "payable": false,
     "stateMutability": "view",
-    "type": "function",
-    "signature": "0x38245377"
+    "type": "function"
   },
   {
     "constant": false,
@@ -1316,7 +1163,6 @@
     "outputs": [],
     "payable": false,
     "stateMutability": "nonpayable",
-    "type": "function",
-    "signature": "0x441a3e70"
+    "type": "function"
   }
 ]

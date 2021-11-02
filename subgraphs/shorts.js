@@ -102,7 +102,7 @@ getContractDeployments('CollateralShort').forEach((a, i) => {
 module.exports = {
   specVersion: '0.0.2',
   description: 'Synthetix Shorts API',
-  repository: 'https://github.com/Synthetixio/synthetix-subgraph',
+  repository: 'https://github.com/demaa-team/synthetix-subgraph',
   schema: {
     file: './shorts.graphql',
   },

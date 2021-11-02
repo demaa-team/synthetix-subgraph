@@ -7,15 +7,15 @@ const manifest = [];
  * or collateral change entities like EtherCollateralsUSD
  */
 
-getContractDeployments('EtherCollateral').forEach((a, i) => {
+getContractDeployments('CollateralEth_r').forEach((a, i) => {
   manifest.push({
     kind: 'ethereum/contract',
-    name: `loans_EtherCollateral_${i}`,
+    name: `loans_CollateralEthr_${i}`,
     network: getCurrentNetwork(),
     source: {
       address: a.address,
       startBlock: a.startBlock,
-      abi: 'EtherCollateral',
+      abi: 'CollateralEth',
     },
     mapping: {
       kind: 'ethereum/events',
@@ -25,8 +25,8 @@ getContractDeployments('EtherCollateral').forEach((a, i) => {
       entities: ['Loan', 'LoanCreated', 'LoanClosed', 'LoanLiquidated'],
       abis: [
         {
-          name: 'EtherCollateral',
-          file: '../abis/EtherCollateral.json',
+          name: 'CollateralEth',
+          file: '../abis/CollateralEth.json',
         },
       ],
       eventHandlers: [
@@ -115,7 +115,7 @@ getContractDeployments('EtherCollateralsUSD').forEach((a, i) => {
 module.exports = {
   specVersion: '0.0.2',
   description: 'Synthetix Loans API',
-  repository: 'https://github.com/Synthetixio/synthetix-subgraph',
+  repository: 'https://github.com/demaa-team/synthetix-subgraph',
   schema: {
     file: './loans.graphql',
   },

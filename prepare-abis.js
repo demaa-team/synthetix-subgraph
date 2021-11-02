@@ -5,11 +5,11 @@ const fs = require('fs');
 const path = require('path');
 const { gray, yellow } = require('chalk');
 const program = require('commander');
-const snx = require('synthetix');
+const snx = require('synthetix-demaa');
 
 program.action(async () => {
   const abiPath = path.join(__dirname, 'abis');
-  const sources = snx.getSource({ network: 'mainnet' });
+  const sources = snx.getSource({ network: 'mumbai' });
 
   const doesEntryHaveMultidimensionalArrays = ({ type }) => /\[[0-9]*\]\[[0-9]*\]/.test(type);
 

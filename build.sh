@@ -1,7 +1,7 @@
 #!/bin/bash
 network=$1
 subgraph=$2
-networks='mainnet optimism kovan optimism-kovan'
+networks='mainnet optimism kovan optimism-kovan mumbai'
 
 GRAPH=${GRAPH:-node_modules/.bin/graph}
 
@@ -9,7 +9,7 @@ GRAPH=${GRAPH:-node_modules/.bin/graph}
 SNX_NETWORK=mainnet SUBGRAPH=$subgraph $GRAPH codegen subgraphs/rates.js -o generated/subgraphs/rates
 SNX_NETWORK=mainnet SUBGRAPH=$subgraph $GRAPH codegen subgraphs/$subgraph.js -o generated/subgraphs/$subgraph
 
-if [ "general" == $subgraph ]; then
+if [ "issuance" == $subgraph ]; then
     node ./create-escrow-contracts
 fi
 
