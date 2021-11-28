@@ -67,28 +67,12 @@ getContractDeployments('CollateralShort').forEach((a, i) => {
           handler: 'handleLoanClosedByLiquidationsUSD',
         },
         {
-          event: 'MinCratioRatioUpdated(uint256)',
-          handler: 'handleMinCratioRatioUpdatedsUSD',
-        },
-        {
           event: 'MinCollateralUpdated(uint256)',
           handler: 'handleMinCollateralUpdatedsUSD',
         },
         {
           event: 'IssueFeeRateUpdated(uint256)',
           handler: 'handleIssueFeeRateUpdatedsUSD',
-        },
-        {
-          event: 'MaxLoansPerAccountUpdated(uint256)',
-          handler: 'handleMaxLoansPerAccountUpdatedsUSD',
-        },
-        {
-          event: 'InteractionDelayUpdated(uint256)',
-          handler: 'handleInteractionDelayUpdatedsUSD',
-        },
-        {
-          event: 'ManagerUpdated(address)',
-          handler: 'handleManagerUpdatedsUSD',
         },
         {
           event: 'CanOpenLoansUpdated(bool)',

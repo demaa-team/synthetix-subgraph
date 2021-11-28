@@ -134,7 +134,7 @@ function getContractDeployments(contractName, startBlock = 0, endBlock = Number.
   return addressInfo;
 }
 
-const NETWORKS = ['mainnet', 'kovan', 'optimism-kovan', 'optimism', 'mumbai'];
+const NETWORKS = ['mumbai'];
 
 module.exports = {
   getCurrentNetwork,

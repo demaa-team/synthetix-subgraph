@@ -2,11 +2,6 @@
   {
     "inputs": [
       {
-        "internalType": "contract CollateralState",
-        "name": "_state",
-        "type": "address"
-      },
-      {
         "internalType": "address",
         "name": "_owner",
         "type": "address"
@@ -141,19 +136,6 @@
       {
         "indexed": false,
         "internalType": "uint256",
-        "name": "interactionDelay",
-        "type": "uint256"
-      }
-    ],
-    "name": "InteractionDelayUpdated",
-    "type": "event"
-  },
-  {
-    "anonymous": false,
-    "inputs": [
-      {
-        "indexed": false,
-        "internalType": "uint256",
         "name": "issueFeeRate",
         "type": "uint256"
       }
@@ -215,6 +197,37 @@
       }
     ],
     "name": "LoanClosedByLiquidation",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "internalType": "address",
+        "name": "account",
+        "type": "address"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "id",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "amountRepaid",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "collateralAfter",
+        "type": "uint256"
+      }
+    ],
+    "name": "LoanClosedByRepayment",
     "type": "event"
   },
   {
@@ -364,51 +377,12 @@
     "inputs": [
       {
         "indexed": false,
-        "internalType": "contract ICollateralManager",
-        "name": "manager",
-        "type": "address"
-      }
-    ],
-    "name": "ManagerUpdated",
-    "type": "event"
-  },
-  {
-    "anonymous": false,
-    "inputs": [
-      {
-        "indexed": false,
-        "internalType": "uint256",
-        "name": "maxLoansPerAccount",
-        "type": "uint256"
-      }
-    ],
-    "name": "MaxLoansPerAccountUpdated",
-    "type": "event"
-  },
-  {
-    "anonymous": false,
-    "inputs": [
-      {
-        "indexed": false,
         "internalType": "uint256",
         "name": "minCollateral",
         "type": "uint256"
       }
     ],
     "name": "MinCollateralUpdated",
-    "type": "event"
-  },
-  {
-    "anonymous": false,
-    "inputs": [
-      {
-        "indexed": false,
-        "internalType": "uint256",
-        "name": "minCratio",
-        "type": "uint256"
-      }
-    ],
-    "name": "MinCratioRatioUpdated",
     "type": "event"
   },
   {
@@ -543,7 +517,44 @@
       }
     ],
     "name": "close",
-    "outputs": [],
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "amount",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "collateral",
+        "type": "uint256"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "constant": false,
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "id",
+        "type": "uint256"
+      }
+    ],
+    "name": "closeWithCollateral",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "amount",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "collateral",
+        "type": "uint256"
+      }
+    ],
     "payable": false,
     "stateMutability": "nonpayable",
     "type": "function"
@@ -567,56 +578,9 @@
     "constant": true,
     "inputs": [
       {
-        "components": [
-          {
-            "internalType": "uint256",
-            "name": "id",
-            "type": "uint256"
-          },
-          {
-            "internalType": "address payable",
-            "name": "account",
-            "type": "address"
-          },
-          {
-            "internalType": "uint256",
-            "name": "collateral",
-            "type": "uint256"
-          },
-          {
-            "internalType": "bytes32",
-            "name": "currency",
-            "type": "bytes32"
-          },
-          {
-            "internalType": "uint256",
-            "name": "amount",
-            "type": "uint256"
-          },
-          {
-            "internalType": "bool",
-            "name": "short",
-            "type": "bool"
-          },
-          {
-            "internalType": "uint256",
-            "name": "accruedInterest",
-            "type": "uint256"
-          },
-          {
-            "internalType": "uint256",
-            "name": "interestIndex",
-            "type": "uint256"
-          },
-          {
-            "internalType": "uint256",
-            "name": "lastInteraction",
-            "type": "uint256"
-          }
-        ],
-        "internalType": "struct ICollateralLoan.Loan",
-        "name": "loan",
-        "type": "tuple"
+        "internalType": "uint256",
+        "name": "id",
+        "type": "uint256"
       }
     ],
     "name": "collateralRatio",
@@ -651,7 +615,18 @@
       }
     ],
     "name": "deposit",
-    "outputs": [],
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "principal",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "collateral",
+        "type": "uint256"
+      }
+    ],
     "payable": false,
     "stateMutability": "nonpayable",
     "type": "function"
@@ -671,19 +646,46 @@
       }
     ],
     "name": "draw",
-    "outputs": [],
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "principal",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "collateral",
+        "type": "uint256"
+      }
+    ],
     "payable": false,
     "stateMutability": "nonpayable",
     "type": "function"
   },
   {
     "constant": true,
-    "inputs": [],
-    "name": "interactionDelay",
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "",
+        "type": "address"
+      },
+      {
+        "internalType": "uint256",
+        "name": "id",
+        "type": "uint256"
+      }
+    ],
+    "name": "getShortAndCollateral",
     "outputs": [
       {
         "internalType": "uint256",
-        "name": "",
+        "name": "principal",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "collateral",
         "type": "uint256"
       }
     ],
@@ -748,6 +750,88 @@
   },
   {
     "constant": true,
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "id",
+        "type": "uint256"
+      }
+    ],
+    "name": "liquidationAmount",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "liqAmount",
+        "type": "uint256"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "constant": true,
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "name": "loans",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "id",
+        "type": "uint256"
+      },
+      {
+        "internalType": "address payable",
+        "name": "account",
+        "type": "address"
+      },
+      {
+        "internalType": "uint256",
+        "name": "collateral",
+        "type": "uint256"
+      },
+      {
+        "internalType": "bytes32",
+        "name": "currency",
+        "type": "bytes32"
+      },
+      {
+        "internalType": "uint256",
+        "name": "amount",
+        "type": "uint256"
+      },
+      {
+        "internalType": "bool",
+        "name": "short",
+        "type": "bool"
+      },
+      {
+        "internalType": "uint256",
+        "name": "accruedInterest",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "interestIndex",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "lastInteraction",
+        "type": "uint256"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "constant": true,
     "inputs": [],
     "name": "manager",
     "outputs": [
@@ -780,21 +864,6 @@
       {
         "internalType": "uint256",
         "name": "max",
-        "type": "uint256"
-      }
-    ],
-    "payable": false,
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "constant": true,
-    "inputs": [],
-    "name": "maxLoansPerAccount",
-    "outputs": [
-      {
-        "internalType": "uint256",
-        "name": "",
         "type": "uint256"
       }
     ],
@@ -882,7 +951,13 @@
       }
     ],
     "name": "open",
-    "outputs": [],
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "id",
+        "type": "uint256"
+      }
+    ],
     "payable": false,
     "stateMutability": "nonpayable",
     "type": "function"
@@ -931,7 +1006,18 @@
       }
     ],
     "name": "repay",
-    "outputs": [],
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "principal",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "collateral",
+        "type": "uint256"
+      }
+    ],
     "payable": false,
     "stateMutability": "nonpayable",
     "type": "function"
@@ -939,11 +1025,6 @@
   {
     "constant": false,
     "inputs": [
-      {
-        "internalType": "address",
-        "name": "borrower",
-        "type": "address"
-      },
       {
         "internalType": "uint256",
         "name": "id",
@@ -953,15 +1034,21 @@
         "internalType": "uint256",
         "name": "amount",
         "type": "uint256"
-      },
-      {
-        "internalType": "bool",
-        "name": "payInterest",
-        "type": "bool"
       }
     ],
     "name": "repayWithCollateral",
-    "outputs": [],
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "principal",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "collateral",
+        "type": "uint256"
+      }
+    ],
     "payable": false,
     "stateMutability": "nonpayable",
     "type": "function"
@@ -1016,21 +1103,6 @@
     "inputs": [
       {
         "internalType": "uint256",
-        "name": "_interactionDelay",
-        "type": "uint256"
-      }
-    ],
-    "name": "setInteractionDelay",
-    "outputs": [],
-    "payable": false,
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "constant": false,
-    "inputs": [
-      {
-        "internalType": "uint256",
         "name": "_issueFeeRate",
         "type": "uint256"
       }
@@ -1045,27 +1117,12 @@
     "constant": false,
     "inputs": [
       {
-        "internalType": "contract ICollateralManager",
-        "name": "_newManager",
-        "type": "address"
-      }
-    ],
-    "name": "setManager",
-    "outputs": [],
-    "payable": false,
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "constant": false,
-    "inputs": [
-      {
         "internalType": "uint256",
-        "name": "_minCratio",
+        "name": "_minCollateral",
         "type": "uint256"
       }
     ],
-    "name": "setMinCratio",
+    "name": "setMinCollateral",
     "outputs": [],
     "payable": false,
     "stateMutability": "nonpayable",
@@ -1084,21 +1141,6 @@
     "outputs": [
       {
         "internalType": "address",
-        "name": "",
-        "type": "address"
-      }
-    ],
-    "payable": false,
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "constant": true,
-    "inputs": [],
-    "name": "state",
-    "outputs": [
-      {
-        "internalType": "contract CollateralState",
         "name": "",
         "type": "address"
       }
@@ -1164,7 +1206,18 @@
       }
     ],
     "name": "withdraw",
-    "outputs": [],
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "principal",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "collateral",
+        "type": "uint256"
+      }
+    ],
     "payable": false,
     "stateMutability": "nonpayable",
     "type": "function"

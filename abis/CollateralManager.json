@@ -23,6 +23,11 @@
       },
       {
         "internalType": "uint256",
+        "name": "_maxSkewRate",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
         "name": "_baseBorrowRate",
         "type": "uint256"
       },
@@ -138,6 +143,19 @@
     "inputs": [
       {
         "indexed": false,
+        "internalType": "uint256",
+        "name": "maxSkewRate",
+        "type": "uint256"
+      }
+    ],
+    "name": "MaxSkewRateUpdated",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": false,
         "internalType": "address",
         "name": "oldOwner",
         "type": "address"
@@ -231,6 +249,19 @@
     "type": "event"
   },
   {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "utilisationMultiplier",
+        "type": "uint256"
+      }
+    ],
+    "name": "UtilisationMultiplierUpdated",
+    "type": "event"
+  },
+  {
     "constant": true,
     "inputs": [],
     "name": "CONTRACT_NAME",
@@ -258,12 +289,68 @@
     "constant": false,
     "inputs": [
       {
+        "internalType": "uint256",
+        "name": "interestIndex",
+        "type": "uint256"
+      },
+      {
+        "internalType": "bytes32",
+        "name": "currency",
+        "type": "bytes32"
+      },
+      {
+        "internalType": "bool",
+        "name": "isShort",
+        "type": "bool"
+      }
+    ],
+    "name": "accrueInterest",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "difference",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "index",
+        "type": "uint256"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "constant": false,
+    "inputs": [
+      {
         "internalType": "address[]",
         "name": "collaterals",
         "type": "address[]"
       }
     ],
     "name": "addCollaterals",
+    "outputs": [],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "constant": false,
+    "inputs": [
+      {
+        "internalType": "bytes32[]",
+        "name": "requiredSynthNamesInResolver",
+        "type": "bytes32[]"
+      },
+      {
+        "internalType": "bytes32[]",
+        "name": "synthKeys",
+        "type": "bytes32[]"
+      }
+    ],
+    "name": "addShortableSynths",
     "outputs": [],
     "payable": false,
     "stateMutability": "nonpayable",
@@ -518,7 +605,7 @@
     "inputs": [
       {
         "internalType": "bytes32",
-        "name": "synth",
+        "name": "synthKey",
         "type": "bytes32"
       }
     ],
@@ -750,6 +837,21 @@
     "type": "function"
   },
   {
+    "constant": true,
+    "inputs": [],
+    "name": "maxSkewRate",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
     "constant": false,
     "inputs": [
       {
@@ -853,7 +955,7 @@
     "inputs": [
       {
         "internalType": "bytes32[]",
-        "name": "synths",
+        "name": "synthNamesInResolver",
         "type": "bytes32[]"
       },
       {
@@ -947,6 +1049,21 @@
     "constant": false,
     "inputs": [
       {
+        "internalType": "uint256",
+        "name": "_maxSkewRate",
+        "type": "uint256"
+      }
+    ],
+    "name": "setMaxSkewRate",
+    "outputs": [],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "constant": false,
+    "inputs": [
+      {
         "internalType": "bool",
         "name": "_paused",
         "type": "bool"
@@ -996,13 +1113,19 @@
   },
   {
     "constant": true,
-    "inputs": [],
-    "name": "state",
+    "inputs": [
+      {
+        "internalType": "bytes32",
+        "name": "",
+        "type": "bytes32"
+      }
+    ],
+    "name": "shortableSynthsByKey",
     "outputs": [
       {
-        "internalType": "contract CollateralManagerState",
+        "internalType": "bytes32",
         "name": "",
-        "type": "address"
+        "type": "bytes32"
       }
     ],
     "payable": false,
@@ -1011,19 +1134,13 @@
   },
   {
     "constant": true,
-    "inputs": [
-      {
-        "internalType": "bytes32",
-        "name": "",
-        "type": "bytes32"
-      }
-    ],
-    "name": "synthToInverseSynth",
+    "inputs": [],
+    "name": "state",
     "outputs": [
       {
-        "internalType": "bytes32",
+        "internalType": "contract CollateralManagerState",
         "name": "",
-        "type": "bytes32"
+        "type": "address"
       }
     ],
     "payable": false,
@@ -1074,6 +1191,26 @@
   {
     "constant": true,
     "inputs": [],
+    "name": "totalLongAndShort",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "susdValue",
+        "type": "uint256"
+      },
+      {
+        "internalType": "bool",
+        "name": "anyRateIsInvalid",
+        "type": "bool"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "constant": true,
+    "inputs": [],
     "name": "totalShort",
     "outputs": [
       {
@@ -1100,7 +1237,7 @@
         "type": "uint256"
       }
     ],
-    "name": "updateBorrowRates",
+    "name": "updateBorrowRatesCollateral",
     "outputs": [],
     "payable": false,
     "stateMutability": "nonpayable",
@@ -1120,7 +1257,7 @@
         "type": "uint256"
       }
     ],
-    "name": "updateShortRates",
+    "name": "updateShortRatesCollateral",
     "outputs": [],
     "payable": false,
     "stateMutability": "nonpayable",

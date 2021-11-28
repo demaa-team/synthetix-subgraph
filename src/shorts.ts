@@ -8,12 +8,8 @@ import {
   LoanDrawnDown as LoanDrawnDownEvent,
   LoanPartiallyLiquidated as LoanPartiallyLiquidatedEvent,
   LoanClosedByLiquidation as LoanClosedByLiquidationEvent,
-  MinCratioRatioUpdated as MinCratioRatioUpdatedEvent,
   MinCollateralUpdated as MinCollateralUpdatedEvent,
   IssueFeeRateUpdated as IssueFeeRateUpdatedEvent,
-  MaxLoansPerAccountUpdated as MaxLoansPerAccountUpdatedEvent,
-  InteractionDelayUpdated as InteractionDelayUpdatedEvent,
-  ManagerUpdated as ManagerUpdatedEvent,
   CanOpenLoansUpdated as CanOpenLoansUpdatedEvent,
 } from '../generated/subgraphs/shorts/shorts_CollateralShort_0/CollateralShort';
 
@@ -71,9 +67,7 @@ function addContractData(
   }
   shortContractEntity.minCratio = collateralShortContract.minCratio();
   shortContractEntity.minCollateral = toDecimal(collateralShortContract.minCollateral());
-  shortContractEntity.maxLoansPerAccount = collateralShortContract.maxLoansPerAccount();
   shortContractEntity.issueFeeRate = toDecimal(collateralShortContract.issueFeeRate());
-  shortContractEntity.interactionDelay = collateralShortContract.interactionDelay();
   shortContractEntity.manager = collateralShortContract.manager();
   shortContractEntity.canOpenLoans = collateralShortContract.canOpenLoans();
   shortContractEntity.save();
@@ -368,27 +362,6 @@ export function handleLoanClosedByLiquidationsUSD(event: LoanClosedByLiquidation
   );
 }
 
-export function handleMinCratioRatioUpdatedsUSD(event: MinCratioRatioUpdatedEvent): void {
-  let shortContractEntity = loadContractData(
-    event.address,
-    event.transaction.hash.toHex(),
-    event.logIndex.toString(),
-    event.block.timestamp,
-    event.block.number,
-  );
-  shortContractEntity.minCratio = event.params.minCratio;
-  shortContractEntity.save();
-  saveContractLevelUpdate(
-    event.transaction.hash.toHex(),
-    event.logIndex.toString(),
-    'minCratio',
-    event.params.minCratio.toString(),
-    event.block.timestamp,
-    event.block.number,
-    shortContractEntity as ShortContract,
-  );
-}
-
 export function handleMinCollateralUpdatedsUSD(event: MinCollateralUpdatedEvent): void {
   let shortContractEntity = loadContractData(
     event.address,
@@ -425,69 +398,6 @@ export function handleIssueFeeRateUpdatedsUSD(event: IssueFeeRateUpdatedEvent): 
     event.logIndex.toString(),
     'issueFeeRate',
     event.params.issueFeeRate.toString(),
-    event.block.timestamp,
-    event.block.number,
-    shortContractEntity as ShortContract,
-  );
-}
-
-export function handleMaxLoansPerAccountUpdatedsUSD(event: MaxLoansPerAccountUpdatedEvent): void {
-  let shortContractEntity = loadContractData(
-    event.address,
-    event.transaction.hash.toHex(),
-    event.logIndex.toString(),
-    event.block.timestamp,
-    event.block.number,
-  );
-  shortContractEntity.maxLoansPerAccount = event.params.maxLoansPerAccount;
-  shortContractEntity.save();
-  saveContractLevelUpdate(
-    event.transaction.hash.toHex(),
-    event.logIndex.toString(),
-    'maxLoansPerAccount',
-    event.params.maxLoansPerAccount.toString(),
-    event.block.timestamp,
-    event.block.number,
-    shortContractEntity as ShortContract,
-  );
-}
-
-export function handleInteractionDelayUpdatedsUSD(event: InteractionDelayUpdatedEvent): void {
-  let shortContractEntity = loadContractData(
-    event.address,
-    event.transaction.hash.toHex(),
-    event.logIndex.toString(),
-    event.block.timestamp,
-    event.block.number,
-  );
-  shortContractEntity.interactionDelay = event.params.interactionDelay;
-  shortContractEntity.save();
-  saveContractLevelUpdate(
-    event.transaction.hash.toHex(),
-    event.logIndex.toString(),
-    'interactionDelay',
-    event.params.interactionDelay.toString(),
-    event.block.timestamp,
-    event.block.number,
-    shortContractEntity as ShortContract,
-  );
-}
-
-export function handleManagerUpdatedsUSD(event: ManagerUpdatedEvent): void {
-  let shortContractEntity = loadContractData(
-    event.address,
-    event.transaction.hash.toHex(),
-    event.logIndex.toString(),
-    event.block.timestamp,
-    event.block.number,
-  );
-  shortContractEntity.manager = event.params.manager;
-  shortContractEntity.save();
-  saveContractLevelUpdate(
-    event.transaction.hash.toHex(),
-    event.logIndex.toString(),
-    'manager',
-    event.params.manager.toHex(),
     event.block.timestamp,
     event.block.number,
     shortContractEntity as ShortContract,
