@@ -102,7 +102,7 @@ export function handleRatesUpdated(event: RatesUpdatedEvent): void {
   for (let i = 0; i < keys.length; i++) {
     let decimalRate = toDecimal(rates[i]);
 
-    if (keys[i].toString() == 'SNX') {
+    if (keys[i].toString() == 'DEM') {
       handleSNXPrices(event.block.timestamp, decimalRate);
     }
 
@@ -121,7 +121,7 @@ export function handleAggregatorAnswerUpdated(event: AnswerUpdatedEvent): void {
 
   addDollar('sUSD');
 
-  if (currencyKey == 'SNX') {
+  if (currencyKey == 'DEM') {
     handleSNXPrices(event.block.timestamp, rate);
   }
 
