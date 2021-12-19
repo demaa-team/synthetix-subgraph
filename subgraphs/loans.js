@@ -7,7 +7,7 @@ const manifest = [];
  * or collateral change entities like EtherCollateralsUSD
  */
 
-getContractDeployments('CollateralEth_r').forEach((a, i) => {
+getContractDeployments('CollateralEth').forEach((a, i) => {
   manifest.push({
     kind: 'ethereum/contract',
     name: `loans_CollateralEthr_${i}`,
@@ -104,7 +104,7 @@ getContractDeployments('EtherCollateralsUSD').forEach((a, i) => {
           handler: 'handleCollateralWithdrawn',
         },
         {
-          event: 'LoanRepaid(indexed address,uint256,uint256,uint256)',
+          event: 'LoanClosedByRepayment(indexed address,uint256,uint256,uint256)',
           handler: 'handleLoanRepaid',
         },
       ],

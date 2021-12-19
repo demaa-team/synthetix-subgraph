@@ -3,7 +3,7 @@ const { values, last, sortedIndexBy } = require('lodash');
 const BLOCK_SAFETY_OFFSET = 8640;
 
 function getCurrentNetwork() {
-  return process.env['SNX_NETWORK'] || 'mainnet';
+  return process.env['SNX_NETWORK'] || 'mumbai';
 }
 
 function getCurrentSubgraph() {

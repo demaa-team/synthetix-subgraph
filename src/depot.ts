@@ -23,7 +23,7 @@ export function handleSynthWithdrawal(event: SynthWithdrawalEvent): void {
   let entity = createUserAction(event);
   entity.user = event.params.user;
   entity.amount = toDecimal(event.params.amount);
-  entity.type = dataSource.network();
+  entity.type = 'withdrawl';
   entity.save();
 }
 
@@ -32,7 +32,7 @@ export function handleSynthDeposit(event: SynthDepositEvent): void {
   entity.user = event.params.user;
   entity.amount = toDecimal(event.params.amount);
   entity.depositIndex = event.params.depositIndex;
-  entity.type = dataSource.network();
+  entity.type = 'deposit';
   entity.save();
 }
 

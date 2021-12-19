@@ -21,7 +21,7 @@ getContractDeployments('Depot').forEach((a, i) => {
       abis: [
         {
           name: 'Depot',
-          file: '../abis/Depot.json',
+          file: '../abis/xx.json',
         },
       ],
       eventHandlers: [
@@ -56,7 +56,7 @@ getContractDeployments('Depot').forEach((a, i) => {
 
 module.exports = {
   specVersion: '0.0.2',
-  description: 'Synthetix Depot API',
+  description: 'Synthetix OTC API',
   repository: 'https://github.com/demaa-team/synthetix-subgraph',
   schema: {
     file: './depot.graphql',

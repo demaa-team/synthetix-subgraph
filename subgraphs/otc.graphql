@@ -1,0 +1,64 @@
+type OTCTotal @entity {
+  id: ID!
+  userCount: BigInt!
+  orderCount: BigInt!
+
+  volume: BigDecimal!
+
+  longestTradePeroid: BigInt!
+  shortestTradePeroid: BigInt!
+
+  dealCountConfirming: BigInt!
+  dealCountCanceled: BigInt!
+  dealCountConfirmed: BigInt!
+
+  timestamp: BigInt!
+  block: BigInt!
+}
+
+type DailyOTC @entity {
+  id: ID!
+
+  volume: BigDecimal!
+
+  openProfile: BigInt!
+  closedProfile: BigInt!
+
+  openOrder: BigInt!
+  closedOrder: BigInt!
+
+  dealCountConfirming: BigInt!
+  dealCountCanceled: BigInt!
+  dealCountConfirmed: BigInt!
+
+  timestamp: BigInt!
+  block: BigInt!
+}
+
+type Order @entity {
+  id: ID!
+  orderID: BigInt!
+  maker: Bytes! # address
+  currencyCode: String! #('CNY', 'USD', 'JPY')
+  price: BigDecimal!
+  leftAmount: BigDecimal!
+  closed: Boolean!
+  cTime: BigInt!
+  uTime: BigInt!
+  block: BigInt!
+}
+
+type Deal @entity {
+  id: ID!
+  dealID: BigInt!
+  maker: Bytes! # address
+  taker: Bytes! # address
+  currencyCode: String! #('CNY', 'USD', 'JPY')
+  price: BigDecimal!
+  amount: BigDecimal!
+  collateral: BigDecimal!
+  dealState: String #('confirming', 'canceled', 'confirmed')
+  cTime: BigInt!
+  uTime: BigInt!
+  block: BigInt!
+}

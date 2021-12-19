@@ -55,6 +55,8 @@ function addContractData(
   let shortContractEntity = ShortContract.load(contractAddress.toHex());
   if (shortContractEntity == null) {
     shortContractEntity = new ShortContract(contractAddress.toHex());
+    shortContractEntity.maxLoansPerAccount = new BigInt(0);
+    shortContractEntity.interactionDelay = new BigInt(0);
     saveContractLevelUpdate(
       txHash,
       logIndex,

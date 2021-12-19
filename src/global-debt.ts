@@ -16,14 +16,14 @@ export function trackGlobalDebt(block: ethereum.Block): void {
   let timeSlot = block.timestamp.minus(block.timestamp.mod(BigInt.fromI32(900)));
 
   let curDebtState = DebtState.load(timeSlot.toString());
-
   if (curDebtState == null) {
     // this is tmp because this will be refactored soon anyway
-    let resolver = AddressResolver.bind(Address.fromHexString('0x4e3b31eb0e5cb73641ee1e65e7dcefe520ba3ef2') as Address);
+    let resolver = AddressResolver.bind(Address.fromHexString('0x9b7aFcC5cC71B68a71c2D1848E3D87406bF46998') as Address);
 
     let synthetixStateAddress = resolver.try_getAddress(strToBytes('SynthetixState', 32));
 
     if (synthetixStateAddress.reverted) {
+      log.debug('failed to get SynthetixState at 0x9b7aFcC5cC71B68a71c2D1848E3D87406bF46998', []);
       return;
     }
 
@@ -56,7 +56,5 @@ export function trackGlobalDebt(block: ethereum.Block): void {
 }
 
 export function handleBlock(block: ethereum.Block): void {
-  if (block.number.mod(BigInt.fromI32(25)).equals(BigInt.fromI32(0))) {
-    trackGlobalDebt(block);
-  }
+  trackGlobalDebt(block);
 }
