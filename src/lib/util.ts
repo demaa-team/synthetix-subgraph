@@ -25,6 +25,17 @@ export function strToBytes(string: string, length: i32 = 32): Bytes {
   return bytes as Bytes;
 }
 
+export function bytes32ToString(value: Bytes): string {
+  let str = '';
+  for (let i: i32 = 0; i < value.length; i++) {
+    if (0 == value[i]) {
+      break;
+    }
+    str = str + String.fromCharCode(value[i]);
+  }
+  return str;
+}
+
 export let sUSD32 = strToBytes('sUSD', 32);
 export let sUSD4 = strToBytes('sUSD', 4);
 export let etherUnits = new BigDecimal(BigInt.fromI32(10).pow(18));

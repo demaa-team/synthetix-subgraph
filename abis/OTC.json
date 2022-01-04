@@ -3,11 +3,6 @@
     "inputs": [
       {
         "internalType": "address",
-        "name": "_asset",
-        "type": "address"
-      },
-      {
-        "internalType": "address",
         "name": "_owner",
         "type": "address"
       },
@@ -20,6 +15,25 @@
     "payable": false,
     "stateMutability": "nonpayable",
     "type": "constructor"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": false,
+        "internalType": "address",
+        "name": "from",
+        "type": "address"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "deal",
+        "type": "uint256"
+      }
+    ],
+    "name": "AdjudicateDeal",
+    "type": "event"
   },
   {
     "anonymous": false,
@@ -85,24 +99,6 @@
         "indexed": false,
         "internalType": "uint256",
         "name": "orderID",
-        "type": "uint256"
-      },
-      {
-        "indexed": false,
-        "internalType": "enum IOTC.CurrencyCode",
-        "name": "code",
-        "type": "uint8"
-      },
-      {
-        "indexed": false,
-        "internalType": "uint256",
-        "name": "price",
-        "type": "uint256"
-      },
-      {
-        "indexed": false,
-        "internalType": "uint256",
-        "name": "amount",
         "type": "uint256"
       }
     ],
@@ -205,18 +201,6 @@
         "internalType": "uint256",
         "name": "orderID",
         "type": "uint256"
-      },
-      {
-        "indexed": false,
-        "internalType": "uint256",
-        "name": "price",
-        "type": "uint256"
-      },
-      {
-        "indexed": false,
-        "internalType": "uint256",
-        "name": "amount",
-        "type": "uint256"
       }
     ],
     "name": "UpdateOrder",
@@ -254,6 +238,51 @@
     "constant": false,
     "inputs": [
       {
+        "internalType": "bytes32[]",
+        "name": "coinCodes",
+        "type": "bytes32[]"
+      },
+      {
+        "internalType": "contract IERC20[]",
+        "name": "contracts",
+        "type": "address[]"
+      }
+    ],
+    "name": "addAsset",
+    "outputs": [],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "constant": false,
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "dealID",
+        "type": "uint256"
+      },
+      {
+        "internalType": "address",
+        "name": "complainant",
+        "type": "address"
+      },
+      {
+        "internalType": "uint256",
+        "name": "compensationRatio",
+        "type": "uint256"
+      }
+    ],
+    "name": "adjudicateDeal",
+    "outputs": [],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "constant": false,
+    "inputs": [
+      {
         "internalType": "uint256",
         "name": "dealID",
         "type": "uint256"
@@ -281,21 +310,6 @@
     "type": "function"
   },
   {
-    "constant": true,
-    "inputs": [],
-    "name": "collateralRatio",
-    "outputs": [
-      {
-        "internalType": "uint256",
-        "name": "",
-        "type": "uint256"
-      }
-    ],
-    "payable": false,
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
     "constant": false,
     "inputs": [
       {
@@ -318,8 +332,54 @@
   },
   {
     "constant": true,
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "name": "dealCollaterals",
+    "outputs": [
+      {
+        "internalType": "bytes32",
+        "name": "collateralType",
+        "type": "bytes32"
+      },
+      {
+        "internalType": "uint256",
+        "name": "lockedAmount",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "collateral",
+        "type": "uint256"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "constant": true,
     "inputs": [],
     "name": "dealCount",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "constant": true,
+    "inputs": [],
+    "name": "dealExpiredPeriod",
     "outputs": [
       {
         "internalType": "uint256",
@@ -358,8 +418,23 @@
     "name": "deals",
     "outputs": [
       {
+        "internalType": "bytes32",
+        "name": "coinCode",
+        "type": "bytes32"
+      },
+      {
+        "internalType": "bytes32",
+        "name": "currencyCode",
+        "type": "bytes32"
+      },
+      {
         "internalType": "uint256",
         "name": "dealID",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "orderID",
         "type": "uint256"
       },
       {
@@ -374,7 +449,7 @@
       },
       {
         "internalType": "uint256",
-        "name": "collateral",
+        "name": "fee",
         "type": "uint256"
       },
       {
@@ -400,11 +475,6 @@
       {
         "internalType": "enum IOTC.DealState",
         "name": "dealState",
-        "type": "uint8"
-      },
-      {
-        "internalType": "enum IOTC.CurrencyCode",
-        "name": "code",
         "type": "uint8"
       }
     ],
@@ -438,7 +508,13 @@
   },
   {
     "constant": true,
-    "inputs": [],
+    "inputs": [
+      {
+        "internalType": "bytes32",
+        "name": "coinCode",
+        "type": "bytes32"
+      }
+    ],
     "name": "erc20",
     "outputs": [
       {
@@ -453,8 +529,34 @@
   },
   {
     "constant": true,
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "amount",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "ratio",
+        "type": "uint256"
+      }
+    ],
+    "name": "exchangeableAsset",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "pure",
+    "type": "function"
+  },
+  {
+    "constant": true,
     "inputs": [],
-    "name": "getCollateralRatio",
+    "name": "feeRatio",
     "outputs": [
       {
         "internalType": "uint256",
@@ -468,28 +570,29 @@
   },
   {
     "constant": true,
-    "inputs": [],
-    "name": "getDealFrozenPeriod",
-    "outputs": [
+    "inputs": [
       {
         "internalType": "uint256",
-        "name": "",
+        "name": "dealID",
         "type": "uint256"
       }
     ],
-    "payable": false,
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "constant": true,
-    "inputs": [],
-    "name": "getMinTradeAmount",
+    "name": "getDealInfo",
     "outputs": [
       {
-        "internalType": "uint256",
+        "internalType": "bool",
         "name": "",
-        "type": "uint256"
+        "type": "bool"
+      },
+      {
+        "internalType": "address",
+        "name": "",
+        "type": "address"
+      },
+      {
+        "internalType": "address",
+        "name": "",
+        "type": "address"
       }
     ],
     "payable": false,
@@ -612,6 +715,48 @@
   },
   {
     "constant": true,
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "dealID",
+        "type": "uint256"
+      }
+    ],
+    "name": "isDealClosed",
+    "outputs": [
+      {
+        "internalType": "bool",
+        "name": "",
+        "type": "bool"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "constant": true,
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "dealID",
+        "type": "uint256"
+      }
+    ],
+    "name": "isDealExpired",
+    "outputs": [
+      {
+        "internalType": "bool",
+        "name": "",
+        "type": "bool"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "constant": true,
     "inputs": [],
     "name": "isResolverCached",
     "outputs": [
@@ -647,6 +792,32 @@
     "type": "function"
   },
   {
+    "constant": true,
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "amount",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "ratio",
+        "type": "uint256"
+      }
+    ],
+    "name": "lockedAsset",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "pure",
+    "type": "function"
+  },
+  {
     "constant": false,
     "inputs": [
       {
@@ -658,30 +829,23 @@
         "internalType": "uint256",
         "name": "amount",
         "type": "uint256"
+      },
+      {
+        "internalType": "bytes32",
+        "name": "collateralType",
+        "type": "bytes32"
       }
     ],
     "name": "makeDeal",
-    "outputs": [
-      {
-        "internalType": "uint256",
-        "name": "",
-        "type": "uint256"
-      }
-    ],
+    "outputs": [],
     "payable": false,
     "stateMutability": "nonpayable",
     "type": "function"
   },
   {
-    "constant": false,
-    "inputs": [
-      {
-        "internalType": "address",
-        "name": "maker",
-        "type": "address"
-      }
-    ],
-    "name": "makeDealMax",
+    "constant": true,
+    "inputs": [],
+    "name": "makerCRatio",
     "outputs": [
       {
         "internalType": "uint256",
@@ -690,7 +854,7 @@
       }
     ],
     "payable": false,
-    "stateMutability": "nonpayable",
+    "stateMutability": "view",
     "type": "function"
   },
   {
@@ -698,11 +862,26 @@
     "inputs": [
       {
         "internalType": "address",
-        "name": "taker",
+        "name": "maker",
         "type": "address"
       }
     ],
-    "name": "maxTradeAmount",
+    "name": "maxExchangeableAsset",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "constant": true,
+    "inputs": [],
+    "name": "maxTradeAmountForVerified",
     "outputs": [
       {
         "internalType": "uint256",
@@ -717,6 +896,11 @@
   {
     "constant": false,
     "inputs": [
+      {
+        "internalType": "bytes32[]",
+        "name": "assetKeys",
+        "type": "bytes32[]"
+      },
       {
         "internalType": "address",
         "name": "newOTC",
@@ -778,9 +962,14 @@
     "constant": false,
     "inputs": [
       {
-        "internalType": "enum IOTC.CurrencyCode",
-        "name": "code",
-        "type": "uint8"
+        "internalType": "bytes32",
+        "name": "coinCode",
+        "type": "bytes32"
+      },
+      {
+        "internalType": "bytes32",
+        "name": "currencyCode",
+        "type": "bytes32"
       },
       {
         "internalType": "uint256",
@@ -826,6 +1015,16 @@
     "name": "orders",
     "outputs": [
       {
+        "internalType": "bytes32",
+        "name": "coinCode",
+        "type": "bytes32"
+      },
+      {
+        "internalType": "bytes32",
+        "name": "currencyCode",
+        "type": "bytes32"
+      },
+      {
         "internalType": "uint256",
         "name": "orderID",
         "type": "uint256"
@@ -842,6 +1041,11 @@
       },
       {
         "internalType": "uint256",
+        "name": "lockedAmount",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
         "name": "cTime",
         "type": "uint256"
       },
@@ -849,11 +1053,6 @@
         "internalType": "uint256",
         "name": "uTime",
         "type": "uint256"
-      },
-      {
-        "internalType": "enum IOTC.CurrencyCode",
-        "name": "code",
-        "type": "uint8"
       }
     ],
     "payable": false,
@@ -946,6 +1145,21 @@
     "type": "function"
   },
   {
+    "constant": false,
+    "inputs": [
+      {
+        "internalType": "bytes32",
+        "name": "coinCode",
+        "type": "bytes32"
+      }
+    ],
+    "name": "removeAsset",
+    "outputs": [],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
     "constant": true,
     "inputs": [],
     "name": "resolver",
@@ -980,11 +1194,11 @@
     "inputs": [
       {
         "internalType": "uint256",
-        "name": "cRatio",
+        "name": "period",
         "type": "uint256"
       }
     ],
-    "name": "setCollateralRatio",
+    "name": "setDealExpiredPeriod",
     "outputs": [],
     "payable": false,
     "stateMutability": "nonpayable",
@@ -1010,6 +1224,51 @@
     "inputs": [
       {
         "internalType": "uint256",
+        "name": "ratio",
+        "type": "uint256"
+      }
+    ],
+    "name": "setFeeRatio",
+    "outputs": [],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "constant": false,
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "cRatio",
+        "type": "uint256"
+      }
+    ],
+    "name": "setMakerCRatio",
+    "outputs": [],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "constant": false,
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "amount",
+        "type": "uint256"
+      }
+    ],
+    "name": "setMaxTradeAmountForVerified",
+    "outputs": [],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "constant": false,
+    "inputs": [
+      {
+        "internalType": "uint256",
         "name": "minAmount",
         "type": "uint256"
       }
@@ -1018,6 +1277,123 @@
     "outputs": [],
     "payable": false,
     "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "constant": false,
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "cRatio",
+        "type": "uint256"
+      }
+    ],
+    "name": "setTakerCRatio",
+    "outputs": [],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "constant": false,
+    "inputs": [
+      {
+        "internalType": "address payable",
+        "name": "_treasuryWallet",
+        "type": "address"
+      }
+    ],
+    "name": "setTreasuryWallet",
+    "outputs": [],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "constant": true,
+    "inputs": [],
+    "name": "takerCRatio",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "constant": true,
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "amount",
+        "type": "uint256"
+      }
+    ],
+    "name": "tradeFee",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "constant": true,
+    "inputs": [],
+    "name": "treasuryWallet",
+    "outputs": [
+      {
+        "internalType": "address payable",
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "constant": true,
+    "inputs": [
+      {
+        "internalType": "bytes32",
+        "name": "",
+        "type": "bytes32"
+      }
+    ],
+    "name": "underlyingAssets",
+    "outputs": [
+      {
+        "internalType": "contract IERC20",
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "constant": true,
+    "inputs": [],
+    "name": "underlyingAssetsCount",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
     "type": "function"
   },
   {

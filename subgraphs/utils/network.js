@@ -97,6 +97,17 @@ function getContractDeployments(contractName, startBlock = 0, endBlock = Number.
   for (const info of values(versionInfo)) {
     const contractInfo = info.contracts[contractName];
     if (contractInfo) {
+      if (contractInfo.address) {
+        if (!contractInfo.block) {
+          contractInfo.block = 0;
+        }
+        addressInfo.push({
+          address: contractInfo.address,
+          // with the regenesis, assume all contracts are basically deployed on the first block (doesn't hurt anything if they were deployed later)
+          startBlock: contractInfo.block || 0,
+        });
+        break;
+      }
       if ((network || getCurrentNetwork()).match('optimism') != null) {
         addressInfo.push({
           address: contractInfo.address,

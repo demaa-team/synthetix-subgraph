@@ -3,13 +3,14 @@ const { getContractDeployments, getCurrentNetwork } = require('./utils/network')
 const manifest = [];
 
 getContractDeployments('OTC', 0, Number.MAX_VALUE, 'mumbai').forEach((a, i) => {
+  console.log(`startBlock ${a.startBlock}`);
   manifest.push({
     kind: 'ethereum/contract',
     name: `OTC_${i}`,
     network: getCurrentNetwork(),
     source: {
       address: a.address,
-      startBlock: a.startBlock | 22727803,
+      startBlock: a.startBlock,
       abi: 'OTC',
     },
     mapping: {
@@ -34,7 +35,7 @@ getContractDeployments('OTC', 0, Number.MAX_VALUE, 'mumbai').forEach((a, i) => {
           handler: 'handleDestroyProfile',
         },
         {
-          event: 'OpenOrder(indexed address,uint256,uint8,uint256,uint256)',
+          event: 'OpenOrder(indexed address,uint256)',
           handler: 'handleOpenOrder',
         },
         {
@@ -42,12 +43,57 @@ getContractDeployments('OTC', 0, Number.MAX_VALUE, 'mumbai').forEach((a, i) => {
           handler: 'handleCloseOrder',
         },
         {
-          event: 'UpdateOrder(indexed address,uint256,uint256,uint256)',
+          event: 'UpdateOrder(indexed address,uint256)',
           handler: 'handleUpdateOrder',
         },
         {
           event: 'UpdateDeal(indexed address,indexed address,uint256,uint8)',
           handler: 'handleUpdateDeal',
+        },
+      ],
+    },
+  });
+});
+
+getContractDeployments('OTCDao', 0, Number.MAX_VALUE, 'mumbai').forEach((a, i) => {
+  console.log(`startBlock ${a.startBlock}`);
+  manifest.push({
+    kind: 'ethereum/contract',
+    name: `OTCDao_${i}`,
+    network: getCurrentNetwork(),
+    source: {
+      address: a.address,
+      startBlock: a.startBlock,
+      abi: 'OTCDao',
+    },
+    mapping: {
+      kind: 'ethereum/events',
+      apiVersion: '0.0.4',
+      language: 'wasm/assemblyscript',
+      file: '../src/otc.ts',
+      entities: ['AdjudicationInfo', 'UserDaoInfo'],
+      abis: [
+        {
+          name: 'OTCDao',
+          file: '../abis/OTCDao.json',
+        },
+      ],
+      eventHandlers: [
+        {
+          event: 'UpdateAdjudication(indexed address,uint256)',
+          handler: 'handleUpdateAdjudication',
+        },
+        {
+          event: 'UpdateVerifiedList(indexed address,indexed address,uint8)',
+          handler: 'handleUpdateVerifiedList',
+        },
+        {
+          event: 'UpdateBlackList(indexed address,indexed address,uint8)',
+          handler: 'handleUpdateUpdateBlackList',
+        },
+        {
+          event: 'UpdateViolationCount(indexed address,indexed address)',
+          handler: 'handleUpdateViolationCount',
         },
       ],
     },

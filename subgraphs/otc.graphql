@@ -40,8 +40,10 @@ type Order @entity {
   orderID: BigInt!
   maker: Bytes! # address
   currencyCode: String! #('CNY', 'USD', 'JPY')
+  coinCode: String! #('USDT', 'dUSD')
   price: BigDecimal!
   leftAmount: BigDecimal!
+  lockedAmount: BigDecimal!
   closed: Boolean!
   cTime: BigInt!
   uTime: BigInt!
@@ -51,14 +53,46 @@ type Order @entity {
 type Deal @entity {
   id: ID!
   dealID: BigInt!
+  orderID: BigInt!
   maker: Bytes! # address
   taker: Bytes! # address
   currencyCode: String! #('CNY', 'USD', 'JPY')
+  coinCode: String! #('USDT', 'dUSD')
   price: BigDecimal!
   amount: BigDecimal!
+  fee: BigDecimal!
+  collateralType: String! #('USDT', 'dUSD', 'DEM')
   collateral: BigDecimal!
+  lockedAmount: BigDecimal!
   dealState: String #('confirming', 'canceled', 'confirmed')
   cTime: BigInt!
   uTime: BigInt!
   block: BigInt!
+}
+
+type AdjudicationInfo @entity {
+  id: ID!
+  dealID: BigInt!
+  plaintiff: Bytes! # address
+  defendant: Bytes! # address
+  adjudicator: Bytes! # address
+  winner: Bytes! # address
+  evidence: String!
+  explanation: String!
+  verdict: String!
+  progress: String #('Applied', 'Responded', 'Adjudicated')
+  cTime: BigInt!
+  uTime: BigInt!
+}
+
+type UserDaoInfo @entity {
+  id: ID!
+  who: Bytes! # address
+  isVerified: Boolean!
+  inBlackList: Boolean!
+  usedNoCollateralCount: BigInt!
+  disputeCount: BigInt!
+  violationCount: BigInt!
+  block: BigInt!
+  uTime: BigInt!
 }
